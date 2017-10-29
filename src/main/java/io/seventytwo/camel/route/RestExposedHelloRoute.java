@@ -2,7 +2,6 @@ package io.seventytwo.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeEditor;
 import org.springframework.stereotype.Component;
 
 @Component
