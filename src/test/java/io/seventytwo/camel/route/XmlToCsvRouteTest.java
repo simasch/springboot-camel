@@ -19,7 +19,7 @@ public class XmlToCsvRouteTest extends CamelTestSupport {
 
     @Test
     public void transformXmlToCsv() throws InterruptedException {
-        mockOut.expectedBodiesReceived("1234,Snickers");
+        mockOut.expectedBodiesReceived("1234,Snickers\r\n");
 
         template.sendBody("direct:in", "<products><product nr=\"1234\"><name>Snickers</name></product></products>");
 
