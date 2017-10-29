@@ -1,4 +1,4 @@
-package io.seventytwo.camel;
+package io.seventytwo.camel.route;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class SpringbootCamelApplicationTests {
+public class RestExposedHelloRouteTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -24,11 +24,11 @@ public class SpringbootCamelApplicationTests {
     @Test
     public void booksTest() {
         ResponseEntity<String> response = restTemplate.exchange(
-                "/camel/hello", HttpMethod.GET, null, String.class);
+                "/camel/hello?name=Simon", HttpMethod.GET, null, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         String hello = response.getBody();
 
-        assertThat(hello).isEqualTo("Hello World");
+        assertThat(hello).isEqualTo("Hello Simon");
     }
 }

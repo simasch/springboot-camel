@@ -1,6 +1,8 @@
 package io.seventytwo.camel.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.http.MediaType;
+import org.springframework.http.MediaTypeEditor;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,10 +19,12 @@ public class RestExposedHelloRoute extends RouteBuilder {
 
         rest("/hello")
                 .get()
+                .produces(MediaType.TEXT_PLAIN_VALUE)
                 .to("direct:hello");
 
         from("direct:hello")
                 .routeId("RestExposedHelloRoute")
-                .transform().constant("Hello World");
+                .log("${headers}")
+                .transform().simple("Hello ${headers.name}");
     }
 }
