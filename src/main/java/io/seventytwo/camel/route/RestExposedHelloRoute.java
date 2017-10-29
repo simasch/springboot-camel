@@ -4,7 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RestExposedRoute extends RouteBuilder {
+public class RestExposedHelloRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
@@ -15,9 +15,12 @@ public class RestExposedRoute extends RouteBuilder {
                 .apiProperty("api.version", "1.0")
                 .apiProperty("cors", "true");
 
-        rest("/hello").get().to("direct:hello");
+        rest("/hello")
+                .get()
+                .to("direct:hello");
 
         from("direct:hello")
+                .routeId("RestExposedHelloRoute")
                 .transform().constant("Hello World");
     }
 }

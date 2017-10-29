@@ -11,9 +11,13 @@ public class RestExposedXmlToCsvRoute extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().contextPath("/camel");
 
-        rest("/products").get().produces("text/csv").to("direct:products");
+        rest("/products")
+                .get()
+                .produces("text/csv")
+                .to("direct:products");
 
         from("direct:products")
+                .routeId("RestExposedXmlToCsvRoute")
                 .pollEnrich("file://c:/var/input?fileName=products.xml&noop=true")
                 .to("xslt:xslt/demo_csv.xslt");
     }
