@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class XmlToCsvRoute extends RouteBuilder {
 
-    private String from = "file://c:/var/input";
+    private String from = "file://c:/var/input?fileName=demo.xml";
     private String to = "file://c:/var/output?fileName=${file:name}.csv";
 
     public XmlToCsvRoute() {
